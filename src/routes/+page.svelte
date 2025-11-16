@@ -143,18 +143,19 @@
   // }
 </script>
 
-<div class="relative w-full max-w-3xl bg-white/10 backdrop-blur-2xl rounded-3xl p-10 border border-white/20 shadow-2xl overflow-hidden">
-  <h1 class="text-4xl font-semibold text-center mb-3 bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+<section class="min-h-[calc(100vh-4rem)] w-full px-4 py-8 sm:px-6 lg:px-10 flex items-center justify-center">
+<div class="relative w-full max-w-3xl bg-white/10 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 lg:p-10 border border-white/20 shadow-2xl overflow-hidden">
+  <h1 class="text-3xl sm:text-4xl font-semibold text-center mb-3 bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
     Fast & Ephemeral Sharing
   </h1>
-  <p class="text-center text-white/70 mb-8">Drop a file or paste some text—everything expires automatically (7 days max, 20&nbsp;MB).</p>
+  <p class="text-center text-white/70 text-base sm:text-lg mb-6 sm:mb-8">Drop a file or paste some text—everything expires automatically (7 days max, 20&nbsp;MB).</p>
 
   <!-- Zone fichiers -->
-  <div class="relative border-2 border-dashed border-white/20 hover:border-neonCyan transition rounded-3xl p-10 bg-white/5 hover:bg-white/10 mb-6 text-center">
+  <div class="relative border-2 border-dashed border-white/20 hover:border-neonCyan transition rounded-3xl p-6 sm:p-8 lg:p-10 bg-white/5 hover:bg-white/10 mb-6 text-center">
     <input type="file" multiple class="absolute inset-0 opacity-0 cursor-pointer" on:change={onFiles} />
     <div>
-      <span class="text-5xl">📁</span>
-      <p class="text-white/70 mt-2">Drop your files here or click to select</p>
+      <span class="text-4xl sm:text-5xl">📁</span>
+      <p class="text-white/70 mt-2 text-base sm:text-lg">Drop your files here or click to select</p>
     </div>
 </div>
 
@@ -190,7 +191,7 @@
 {/if}
 
   {#if files.length}
-    <ul class="grid md:grid-cols-2 gap-3 mb-6">
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
       {#each files as f}
         <li class="bg-white/10 border border-white/10 rounded-xl p-3 flex items-center justify-between">
           <span class="truncate">{f.name}</span>
@@ -201,15 +202,17 @@
   {/if}
 
   <!-- Texte -->
-  <textarea bind:value={text} placeholder="Paste your text here…" class="w-full bg-white/10 border border-white/20 rounded-2xl p-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-neonCyan mb-6 resize-none h-36"></textarea>
+  <textarea bind:value={text} placeholder="Paste your text here…" class="w-full bg-white/10 border border-white/20 rounded-2xl p-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-neonCyan mb-6 resize-none min-h-[10rem] sm:min-h-[12rem]"></textarea>
 
   <!-- Option chiffrement -->
-  <div class="flex items-start gap-3 mb-6">
-    <input type="checkbox" bind:checked={encrypt} class="mt-1" />
-    <label class="text-sm text-white/70">🔒 Encrypt with a public key</label>
+  <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-6 text-white/70">
+    <label class="inline-flex items-center gap-2 text-sm">
+      <input type="checkbox" bind:checked={encrypt} class="accent-cyan-300" />
+      🔒 Encrypt with a public key
+    </label>
   </div>
   {#if encrypt}
-    <textarea bind:value={recipientKey} placeholder="Paste the recipient's PEM public key" class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-sm text-white placeholder-white/50"></textarea>
+    <textarea bind:value={recipientKey} placeholder="Paste the recipient's PEM public key" class="w-full bg-white/10 border border-white/20 rounded-xl p-3 text-sm text-white placeholder-white/50 mb-4"></textarea>
   {/if}
 
   {#if errorMessage}
@@ -222,7 +225,7 @@
     <button
       type="button"
       on:click={generateCode}
-      class={`bg-gradient-to-r from-neonCyan to-neonPink text-dark font-semibold rounded-2xl py-3 px-6 text-lg shadow-lg transition-all ${
+      class={`w-full sm:w-auto bg-gradient-to-r from-neonCyan to-neonPink text-dark font-semibold rounded-2xl py-3 px-6 text-lg shadow-lg transition-all ${
         isLoading ? "opacity-60 cursor-not-allowed" : "hover:scale-[1.03]"
       }`}
       disabled={isLoading}
@@ -245,3 +248,4 @@
     </div>
   {/if}
 </div>
+</section>
